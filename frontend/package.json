@@ -1,0 +1,23 @@
+{
+  "name": "weather-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/icon": "^1.8.2",
+    "@nuxt/ui": "^3.0.0",
+    "nuxt": "^4.0.0"
+  },
+  "devDependencies": {
+    "@iconify-json/wi": "^1.2.1",
+    "typescript": "^5.7.2",
+    "vue-tsc": "^2.1.10"
+  }
+}
