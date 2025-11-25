@@ -112,11 +112,13 @@ class OpenWeatherService:
                         hour_data = data["data"][0]
 
                         # Calculate precipitation (rain + snow)
-                        precipitation = 0.0
+                        # API returns precipitation in mm, convert to inches
+                        precipitation_mm = 0.0
                         if "rain" in hour_data:
-                            precipitation += hour_data["rain"].get("1h", 0)
+                            precipitation_mm += hour_data["rain"].get("1h", 0)
                         if "snow" in hour_data:
-                            precipitation += hour_data["snow"].get("1h", 0)
+                            precipitation_mm += hour_data["snow"].get("1h", 0)
+                        precipitation = precipitation_mm / 25.4  # Convert mm to inches
 
                         history_entries.append(HistoryEntry(
                             dt=hour_data["dt"],
