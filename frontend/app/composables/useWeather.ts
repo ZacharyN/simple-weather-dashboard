@@ -96,7 +96,21 @@ export interface WeatherData {
 
 export function useWeather() {
   const config = useRuntimeConfig()
-  const apiBase = config.public.apiBase
+
+  // Dynamically determine API base URL based on current hostname
+  // This allows the app to work when accessed via localhost or IP address
+  const getApiBase = () => {
+    if (process.client) {
+      // In browser: construct URL based on current hostname
+      const protocol = window.location.protocol
+      const hostname = window.location.hostname
+      return `${protocol}//${hostname}:8000`
+    }
+    // Fallback to config for SSR
+    return config.public.apiBase
+  }
+
+  const apiBase = getApiBase()
 
   // Use useState for shared state across components
   const weatherData = useState<WeatherData>('weatherData', () => ({

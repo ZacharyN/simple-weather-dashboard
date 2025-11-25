@@ -4,9 +4,11 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     openweather_api_key: str
-    default_lat: float = 40.7128  # New York City
-    default_lon: float = -74.0060
-    cors_origins: list[str] = ["http://localhost:3000", "http://frontend:3000"]
+    default_lat: float = 41.267652  # Omaha, NE
+    default_lon: float = -96.1420957
+    # Allow all origins for local development/production
+    # This enables access via localhost, IP address, or any hostname
+    cors_origins: list[str] = ["*"]
 
     class Config:
         env_file = ".env"

@@ -8,7 +8,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8000'
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8000',
+      defaultLat: process.env.NUXT_PUBLIC_DEFAULT_LAT || '41.267652',
+      defaultLon: process.env.NUXT_PUBLIC_DEFAULT_LON || '-96.1420957'
     }
   },
 

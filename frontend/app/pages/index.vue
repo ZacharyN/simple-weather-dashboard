@@ -1,10 +1,11 @@
 <script setup lang="ts">
 const { weatherData, loading, error, fetchAllWeatherData } = useWeather()
+const config = useRuntimeConfig()
 
-// Default coordinates (can be changed)
-const lat = ref(40.7128) // New York City
-const lon = ref(-74.0060)
-const locationName = ref('New York, NY')
+// Default coordinates from environment variables
+const lat = ref(parseFloat(config.public.defaultLat))
+const lon = ref(parseFloat(config.public.defaultLon))
+const locationName = ref('Default Location')
 
 // Fetch weather data on mount
 onMounted(async () => {
