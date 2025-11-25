@@ -83,7 +83,8 @@ class OpenWeatherService:
         history_entries: list[HistoryEntry] = []
 
         # Get historical data for each hour
-        now = datetime.utcnow()
+        # Normalize to the start of the current hour for consistent results across refreshes
+        now = datetime.utcnow().replace(minute=0, second=0, microsecond=0)
 
         async with httpx.AsyncClient() as client:
             for i in range(hours):
