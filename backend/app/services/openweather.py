@@ -83,7 +83,8 @@ class OpenWeatherService:
         history_entries: list[HistoryEntry] = []
 
         # Get historical data for each hour
-        now = datetime.utcnow()
+        # Normalize to the start of the current hour for consistent results across refreshes
+        now = datetime.utcnow().replace(minute=0, second=0, microsecond=0)
 
         async with httpx.AsyncClient() as client:
             for i in range(hours):
@@ -111,11 +112,13 @@ class OpenWeatherService:
                         hour_data = data["data"][0]
 
                         # Calculate precipitation (rain + snow)
-                        precipitation = 0.0
+                        # API returns precipitation in mm, convert to inches
+                        precipitation_mm = 0.0
                         if "rain" in hour_data:
-                            precipitation += hour_data["rain"].get("1h", 0)
+                            precipitation_mm += hour_data["rain"].get("1h", 0)
                         if "snow" in hour_data:
-                            precipitation += hour_data["snow"].get("1h", 0)
+                            precipitation_mm += hour_data["snow"].get("1h", 0)
+                        precipitation = precipitation_mm / 25.4  # Convert mm to inches
 
                         history_entries.append(HistoryEntry(
                             dt=hour_data["dt"],
