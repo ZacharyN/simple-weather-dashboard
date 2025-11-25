@@ -23,8 +23,7 @@ dist/
 .vscode/
 *.swp
 *.swo
-.claude
-.playwright-mcp
+
 
 # OS
 .DS_Store
@@ -33,3 +32,4 @@ Thumbs.db
 # Logs
 *.log
 logs/
+/.claude/
