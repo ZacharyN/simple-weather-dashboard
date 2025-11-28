@@ -101,10 +101,10 @@ export function useWeather() {
   // This allows the app to work when accessed via localhost or IP address
   const getApiBase = () => {
     if (process.client) {
-      // In browser: construct URL based on current hostname, using port from apiBase config
-      const protocol = window.location.protocol
+      // In browser: construct URL using current hostname but protocol/port from apiBase config
       const hostname = window.location.hostname
       const apiBaseUrl = new URL(config.public.apiBase)
+      const protocol = apiBaseUrl.protocol
       const port = apiBaseUrl.port
       return port ? `${protocol}//${hostname}:${port}` : `${protocol}//${hostname}`
     }
