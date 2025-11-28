@@ -24,7 +24,8 @@
       "mcp__playwright__browser_press_key",
       "Bash(Get-ItemProperty \"F:\\PyCharm-Projects\\weatherDashboard\\frontend\\app\\components\\HourlyForecast.vue\")",
       "Bash(Select-Object LastWriteTime)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "mcp__archon__health_check"
     ],
     "deny": [],
     "ask": []

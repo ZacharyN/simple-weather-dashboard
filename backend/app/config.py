@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     # Allow all origins for local development/production
     # This enables access via localhost, IP address, or any hostname
     cors_origins: list[str] = ["*"]
+    # Backend server port (change if 8000 is already in use)
+    backend_port: int = 8000
 
     class Config:
         env_file = ".env"

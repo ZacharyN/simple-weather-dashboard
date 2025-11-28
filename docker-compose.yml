@@ -5,13 +5,16 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+      args:
+        - BACKEND_PORT=${BACKEND_PORT:-8000}
     container_name: weather-backend
     ports:
-      - "8000:8000"
+      - "${BACKEND_PORT:-8000}:${BACKEND_PORT:-8000}"
     environment:
       - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
       - DEFAULT_LAT=${DEFAULT_LAT:-40.7128}
       - DEFAULT_LON=${DEFAULT_LON:--74.0060}
+      - BACKEND_PORT=${BACKEND_PORT:-8000}
     restart: unless-stopped
 
   frontend:
@@ -25,7 +28,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NUXT_PUBLIC_API_BASE=http://localhost:8000
+      - NUXT_PUBLIC_API_BASE=http://localhost:${BACKEND_PORT:-8000}
       - NUXT_PUBLIC_DEFAULT_LAT=${DEFAULT_LAT:-41.267652}
       - NUXT_PUBLIC_DEFAULT_LON=${DEFAULT_LON:--96.1420957}
     depends_on:
