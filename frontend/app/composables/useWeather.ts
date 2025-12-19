@@ -95,24 +95,9 @@ export interface WeatherData {
 }
 
 export function useWeather() {
-  const config = useRuntimeConfig()
-
-  // Dynamically determine API base URL based on current hostname
-  // This allows the app to work when accessed via localhost or IP address
-  const getApiBase = () => {
-    if (process.client) {
-      // In browser: construct URL using current hostname but protocol/port from apiBase config
-      const hostname = window.location.hostname
-      const apiBaseUrl = new URL(config.public.apiBase)
-      const protocol = apiBaseUrl.protocol
-      const port = apiBaseUrl.port
-      return port ? `${protocol}//${hostname}:${port}` : `${protocol}//${hostname}`
-    }
-    // Fallback to config for SSR
-    return config.public.apiBase
-  }
-
-  const apiBase = getApiBase()
+  // API requests go through Nuxt's proxy at /api
+  // The proxy forwards to the backend internally, avoiding mixed content issues
+  const apiBase = '/api'
 
   // Use useState for shared state across components
   const weatherData = useState<WeatherData>('weatherData', () => ({

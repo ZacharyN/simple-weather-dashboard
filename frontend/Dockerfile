@@ -9,7 +9,11 @@ RUN npm install --legacy-peer-deps
 # Copy application
 COPY . .
 
-# Build application
+# Backend URL for API proxy (build-time configuration)
+ARG BACKEND_URL=http://localhost:8000
+ENV BACKEND_URL=${BACKEND_URL}
+
+# Build application with proxy configuration
 RUN npm run build
 
 # Expose port

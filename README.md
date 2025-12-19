@@ -47,8 +47,8 @@ A clean, modern weather dashboard built with FastAPI and Nuxt 4.
 
 4. **Access the dashboard**
    - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8000
-   - API Docs: http://localhost:8000/docs
+   - Backend API: http://localhost:8009 (or your configured port)
+   - API Docs: http://localhost:8009/docs
 
 ## Development
 
@@ -87,7 +87,15 @@ npm run dev
 | `OPENWEATHER_API_KEY` | Your OpenWeather API key | Required |
 | `DEFAULT_LAT` | Default latitude | 40.7128 |
 | `DEFAULT_LON` | Default longitude | -74.0060 |
-| `NUXT_PUBLIC_API_BASE` | Backend API URL | http://localhost:8000 |
+| `BACKEND_PORT` | Backend server port | 8000 |
+
+## Production Deployment (Homelab)
+
+The frontend proxies API requests internally, so you only need one reverse proxy entry:
+
+1. Point your reverse proxy (NPM, Traefik, etc.) to the frontend container on port 3000
+2. API requests to `/api/*` are automatically proxied to the backend
+3. No separate backend proxy entry needed
 
 ## License
 
