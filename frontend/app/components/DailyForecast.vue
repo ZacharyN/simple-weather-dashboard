@@ -69,6 +69,15 @@ const getMoonPhase = (phase: number) => {
       <template #content>
         <UCard v-if="selectedDay">
           <template #header>
+          <div class="relative">
+            <!-- Close button for mobile -->
+            <button
+              @click="isModalOpen = false"
+              class="absolute -right-2 -top-2 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 rounded-full"
+              aria-label="Close modal"
+            >
+              <UIcon name="i-heroicons-x-mark" class="w-5 h-5" />
+            </button>
             <div class="flex flex-col items-center text-center">
               <img
                 v-if="selectedDay.weather[0]"
@@ -86,8 +95,11 @@ const getMoonPhase = (phase: number) => {
                 {{ formatTemp(selectedDay.temp.max) }} / {{ formatTemp(selectedDay.temp.min) }}
               </div>
             </div>
+          </div>
           </template>
 
+          <!-- Scrollable body content for mobile -->
+          <div class="max-h-[60vh] overflow-y-auto">
           <!-- Summary if available -->
           <p v-if="selectedDay.summary" class="text-sm text-gray-600 dark:text-gray-300 mb-4 text-center">
             {{ selectedDay.summary }}
@@ -180,6 +192,7 @@ const getMoonPhase = (phase: number) => {
                 <div class="text-sm font-medium">{{ getMoonPhase(selectedDay.moon_phase) }}</div>
               </div>
             </div>
+          </div>
           </div>
         </UCard>
       </template>
