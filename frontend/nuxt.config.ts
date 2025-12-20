@@ -6,6 +6,14 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  // Bundle icons at build time to avoid /api/_nuxt_icon conflicts with backend proxy
+  icon: {
+    clientBundle: {
+      scan: true,
+      sizeLimitKb: 512
+    }
+  },
+
   runtimeConfig: {
     // Private config (server-side only) - used for proxying
     backendUrl: process.env.BACKEND_URL || 'http://localhost:8000',
